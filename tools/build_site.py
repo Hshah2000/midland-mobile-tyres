@@ -405,7 +405,7 @@ def build_home():
       <div class="tip"><strong>Quick tip:</strong> your tyre size is printed on the side of the tyre and looks like <strong>205/55 R16</strong>. Have it ready when you call, or send us a photo on WhatsApp.</div>
     </div>
     <div class="flyer-frame">
-      <img src="images/flyer.jpg" width="1200" height="675" loading="lazy" alt="Midland Mobile Tyres flyer: puncture repairs, tyre changes and battery assistance, available 24/7 across the Midlands and Shropshire">
+      <img src="images/tyre-change.jpg" width="1200" height="669" loading="lazy" alt="Mobile tyre fitter changing a car tyre on a driveway with a trolley jack and impact wrench">
     </div>
   </div>
 </section>
