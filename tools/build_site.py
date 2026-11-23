@@ -44,6 +44,7 @@ I = {
     "home": ico('<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>'),
     "pin": ico('<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>'),
     "check": ico('<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/>'),
+    "locknut": ico('<path d="M12 2.5l8.2 4.75v9.5L12 21.5l-8.2-4.75v-9.5z"/><circle cx="12" cy="10.5" r="2.2"/><path d="M12 12.7v3.3"/>'),
     "menu": ico('<path d="M3 6h18M3 12h18M3 18h18"/>'),
 }
 
@@ -119,7 +120,7 @@ AREAS = [
         "nearby": "St Georges, Wrockwardine Wood, Trench, Ketley Bank and Priorslee",
         "intro": [
             "Need a tyre in Oakengates? Midland Mobile Tyres comes to your door, your workplace or the roadside, and fits the new tyre on the spot.",
-            "We're local to Telford, so Oakengates and the neighbouring estates are right on our doorstep. Call 24/7 for tyres, punctures, batteries and roadside help.",
+            "We're local to Telford, so Oakengates and the neighbouring estates are right on our doorstep. Call 24/7 for tyres, punctures, batteries, locking wheel nut removal and roadside help.",
         ],
         "faq": [
             ("Do you cover St Georges and Trench as well?", "Yes, along with all of the surrounding Telford estates."),
@@ -132,6 +133,7 @@ SERVICES = [
     ("tyre", "Tyre Changes", "New tyres fitted at your home, work or roadside. Tell us your tyre size and we'll bring the right tyre to you."),
     ("wrench", "Puncture Repairs", "Nails, screws and slow punctures repaired on the spot where it's safe to do so. If it can't be repaired, we'll replace it."),
     ("battery", "Battery Assistance", "Flat battery? We can get you started and help you sort out a replacement if your battery has had it."),
+    ("locknut", "Locking Wheel Nut Removal", "Lost or damaged locking wheel nut key? We can remove locking wheel nuts on the spot so your wheel can come off."),
     ("warning", "Roadside Assistance", "Stuck at the roadside? We come out 24/7 to get you moving again, whatever the time."),
 ]
 
@@ -141,6 +143,7 @@ HOME_FAQ = [
     ("Which areas do you cover?", "The Midlands and Shropshire, including Telford, Shrewsbury, Wellington, Newport, Bridgnorth and Oakengates. If you're not sure we cover you, call us and ask."),
     ("What information do you need when I call?", "Your location, the make and model of your car, and your tyre size. The size is printed on the side of the tyre and looks like 205/55 R16."),
     ("Can my puncture be repaired?", "Many punctures in the main tread can be repaired safely. Damage to the sidewall or shoulder, or a tyre that's been driven on flat, usually means it needs replacing. We'll check and tell you honestly."),
+    ("Can you remove a locking wheel nut without the key?", "Yes. If you've lost the key or it's damaged, we can remove the locking wheel nuts on the spot so we can get the wheel off and fit your tyre."),
     ("Can I message you instead of calling?", f"Yes. Message us on WhatsApp at {PHONE_DISPLAY}. Sending your location and a photo of the tyre sidewall helps us quote quickly."),
 ]
 
@@ -185,7 +188,7 @@ def header(root, current=""):
     home = f"{root}index.html" if root else ""
     return f"""<div class="topbar">
   <div class="container">
-    <span class="tb-services">Tyres &bull; Punctures &bull; Batteries &bull; Roadside Assistance</span>
+    <span class="tb-services">Tyres &bull; Punctures &bull; Batteries &bull; Locking Wheel Nuts &bull; Roadside</span>
     <a href="{TEL}">Available 24/7 &mdash; Call {PHONE_DISPLAY}</a>
   </div>
 </div>
@@ -246,6 +249,7 @@ def footer(root):
           <li><a href="{home}#services">Tyre changes</a></li>
           <li><a href="{home}#services">Puncture repairs</a></li>
           <li><a href="{home}#services">Battery assistance</a></li>
+          <li><a href="{home}#services">Locking wheel nut removal</a></li>
           <li><a href="{home}#services">Roadside assistance</a></li>
         </ul>
       </div>
@@ -294,7 +298,7 @@ def business_ld():
         "@type": "AutoRepair",
         "@id": f"{BASE_URL}/#business",
         "name": BUSINESS,
-        "description": "24/7 mobile tyre fitting, puncture repairs, battery assistance and roadside assistance across the Midlands and Shropshire.",
+        "description": "24/7 mobile tyre fitting, puncture repairs, battery assistance, locking wheel nut removal and roadside assistance across the Midlands and Shropshire.",
         "url": f"{BASE_URL}/",
         "telephone": PHONE_INTL,
         "image": f"{BASE_URL}/images/flyer.jpg",
@@ -329,8 +333,8 @@ def area_links(root, exclude=None):
 # ------------------------------ pages -----------------------------
 def build_home():
     title = "24/7 Mobile Tyre Fitting Shropshire | Midland Mobile Tyres"
-    desc = (f"24/7 mobile tyre fitting, puncture repairs, battery and roadside assistance in Telford, "
-            f"Shrewsbury and across the Midlands & Shropshire. We come to you. Call {PHONE_DISPLAY}.")
+    desc = (f"24/7 mobile tyre fitting, puncture repairs, locking wheel nut removal, battery and roadside help in "
+            f"Telford, Shrewsbury & across Shropshire. We come to you. Call {PHONE_DISPLAY}.")
     html = head(title, desc, "", "", [business_ld(), faq_ld(HOME_FAQ)])
     html += header("")
     html += f"""<main id="main">
@@ -339,8 +343,8 @@ def build_home():
     <div>
       <div class="badge-247"><span class="circle">24/7</span> Mobile tyre services &amp; roadside assistance</div>
       <h1>Mobile Tyre Fitting in <span class="hl">Telford, Shropshire</span> &amp; the Midlands</h1>
-      <ul class="service-tags"><li>Tyres</li><li>Punctures</li><li>Batteries</li><li>Roadside Assistance</li></ul>
-      <p class="lead">Flat tyre, puncture or dead battery? We come to you, at home, at work or at the roadside, day or night, and get you back on the road.</p>
+      <ul class="service-tags"><li>Tyres</li><li>Punctures</li><li>Batteries</li><li>Locking Wheel Nuts</li><li>Roadside Assistance</li></ul>
+      <p class="lead">Flat tyre, puncture, dead battery or lost locking wheel nut key? We come to you, at home, at work or at the roadside, day or night, and get you back on the road.</p>
       <div class="btn-row">
         <a class="btn btn-yellow" href="{TEL}">{I["phone"]} Call {PHONE_DISPLAY}</a>
         <a class="btn btn-outline" href="{WA}" rel="noopener" target="_blank">{I["chat"]} WhatsApp us</a>
@@ -398,7 +402,7 @@ def build_home():
       <ul class="ticks">
         <li>{I["check"]}<div><strong>Open 24 hours, 7 days a week</strong>Nights, weekends and bank holidays. Call whenever it happens.</div></li>
         <li>{I["check"]}<div><strong>We come to you</strong>Home, work or roadside. No need to drive on a flat.</div></li>
-        <li>{I["check"]}<div><strong>Tyres, punctures &amp; batteries</strong>One call covers the most common breakdown problems.</div></li>
+        <li>{I["check"]}<div><strong>Tyres, punctures, batteries &amp; locking wheel nuts</strong>One call covers the most common breakdown problems.</div></li>
         <li>{I["check"]}<div><strong>Local to the Midlands &amp; Shropshire</strong>We know the area, so we can find you fast.</div></li>
       </ul>
       <a class="btn btn-yellow" href="{TEL}">{I["phone"]} Call {PHONE_DISPLAY}</a>
@@ -457,8 +461,8 @@ def build_area(a):
     name = a["name"]
     path = f"areas/{a['slug']}.html"
     title = f"Mobile Tyre Fitting {name} | 24/7 | Midland Mobile Tyres"
-    desc = (f"24/7 mobile tyre fitting in {name}. Tyre changes, puncture repairs, battery and roadside "
-            f"assistance at your home, work or roadside. Call {PHONE_DISPLAY}.")
+    desc = (f"24/7 mobile tyre fitting in {name}. Tyre changes, puncture repairs, locking wheel nut removal, "
+            f"battery and roadside help at home, work or roadside. Call {PHONE_DISPLAY}.")
     service_ld = {
         "@context": "https://schema.org", "@type": "Service",
         "name": f"Mobile tyre fitting in {name}",
@@ -480,7 +484,7 @@ def build_area(a):
     <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li aria-current="page">Mobile Tyres {name}</li></ol></nav>
     <div class="badge-247"><span class="circle">24/7</span> Mobile tyre fitting {name}</div>
     <h1>Mobile Tyre Fitting <span class="hl">{name}</span></h1>
-    <p class="lead">Tyres, punctures, batteries and roadside assistance in {name}, 24 hours a day. We come to you.</p>
+    <p class="lead">Tyres, punctures, batteries, locking wheel nut removal and roadside assistance in {name}, 24 hours a day. We come to you.</p>
     <div class="btn-row">
       <a class="btn btn-yellow" href="{TEL}">{I["phone"]} Call {PHONE_DISPLAY}</a>
       <a class="btn btn-outline" href="{WA}" rel="noopener" target="_blank">{I["chat"]} WhatsApp us</a>
